@@ -1,1 +1,8 @@
 name: my first workflow
+on: workflow_dispatch
+jobs:
+  myfirstjob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: my first step
+        run: echo "Hello, World!"
