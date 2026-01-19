@@ -5,4 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: my first step
-        run: echo "Hello, World!"
+        run: echo "Hello, World"
+
+      - name: check runner OS
+        run: cat /etc/os-release
