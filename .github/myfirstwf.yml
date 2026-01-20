@@ -4,8 +4,7 @@ jobs:
   myfirstjob:
     runs-on: ubuntu-latest
     steps:
-      - name: my first step
-        run: echo "Hello, World"
+      - name: Additon
+        run: expr 1 + 1
 
-      - name: check runner OS
-        run: cat /etc/os-release
+      
