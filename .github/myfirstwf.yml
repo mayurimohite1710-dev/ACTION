@@ -1,15 +1,23 @@
 name: my first workflow
-on: workflow_dispatch
+on: push
 jobs:
   myfirstjob:
     runs-on: ubuntu-latest
     steps:
       - name: clone repo
-        run: git clone https://github.com/mayurimohite1710-dev/ACTION.git
+        run: action/checkout@v6
+        steps:
+          - name: list files
+            run: ls -la
 
-      - name: check files in repo
-        run: 
-          cd ACTION/.github
-          ls -la
+  mysecondjob:
+    runs-on: ubuntu-latest
+    steps:
+          - name: install node js
+            uses: actions/setup-node@v4
+            with:
+              node-version: '20'
+          - name: check node js version
+            run: node --version
 
-      
+        
