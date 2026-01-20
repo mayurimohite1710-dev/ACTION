@@ -4,7 +4,12 @@ jobs:
   myfirstjob:
     runs-on: ubuntu-latest
     steps:
-      - name: Additon
-        run: expr 1 + 1
+      - name: clone repo
+        run: git clone https://github.com/mayurimohite1710-dev/ACTION.git
+
+      - name: check files in repo
+        run: 
+          cd ACTION/.github
+          ls -l
 
       
