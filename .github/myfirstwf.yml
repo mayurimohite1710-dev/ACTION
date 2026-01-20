@@ -14,11 +14,11 @@ jobs:
           push: report.txt
 
   mysecondjob:
-    runs-on: self hosted
+    runs-on: ubuntu-latest
     needs: myfirstjob
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v5
         with:
           name: my-report
 
