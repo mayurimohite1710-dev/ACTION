@@ -10,6 +10,6 @@ jobs:
       - name: check files in repo
         run: 
           cd ACTION/.github
-          ls -l
+          ls -la
 
       
