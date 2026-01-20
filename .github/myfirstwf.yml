@@ -12,3 +12,15 @@ jobs:
         with:
           name: my-report
           push: report.txt
+
+  mysecondjob:
+    runs-on: self hosted
+    needs: myfirstjob
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: my-report
+
+      - name: Check artifact content
+        run: cat report.txt
