@@ -1,26 +1,43 @@
-name: my first workflow
-on: push
+name: CI-CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  myfirstjob:
+  ci:
     runs-on: ubuntu-latest
     steps:
-      - name: creating a report file
-        run: "echo 'This is my first report file' > report.txt"
-      
-      - name: Upload report file
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build step
+        run: |
+          echo "This is CI build output" > report.txt
+
+      - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
-          name: my-report
-          push: report.txt
+          name: build-artifact
+          path: report.txt
 
-  mysecondjob:
+  cd:
     runs-on: ubuntu-latest
-    needs: myfirstjob
+    needs: ci
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v5
         with:
-          name: my-report
+          name: build-artifact
 
-      - name: Check artifact content
-        run: cat report.txt
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_IP }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu
+            echo "Deploying artifact..."
+            cat build-artifact/report.txt > deployed.txt
